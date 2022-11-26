@@ -2,6 +2,6 @@
 
 int main()
 {
-    /* code */
+    // implement console app
     return 0;
 }
