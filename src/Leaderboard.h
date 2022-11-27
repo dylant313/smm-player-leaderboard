@@ -13,7 +13,7 @@ private:
 
 public:
     Leaderboard();
-    void mergeSort();
-    void radixSort();
-    void search(string name);
+    vector<vector<string>> mergeSort(int option);
+    vector<vector<string>> radixSort(int option);
+    vector<string> search(string name);
 };

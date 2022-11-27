@@ -1,18 +1,21 @@
 #include "Leaderboard.h"
 
+// import data into map
 Leaderboard::Leaderboard()
 {
-    // import data into map
 }
 
-void Leaderboard::mergeSort()
+// return sorted vector
+vector<vector<string>> Leaderboard::mergeSort(int option)
 {
 }
 
-void Leaderboard::radixSort()
+// return sorted vector
+vector<vector<string>> Leaderboard::radixSort(int option)
 {
 }
 
-void Leaderboard::search(string name)
+// search using map, return player
+vector<string> Leaderboard::search(string name)
 {
 }
