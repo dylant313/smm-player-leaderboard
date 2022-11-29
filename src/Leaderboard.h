@@ -9,11 +9,12 @@ using namespace std;
 class Leaderboard
 {
 private:
-    unordered_map<string, vector<string>> unsortedPlayers;
+    // each player is represented by a string (name) and map of values (clears, likes, etc)
+    unordered_map<string, unordered_map<string, int>> unsortedPlayers;
 
 public:
     Leaderboard();
-    vector<vector<string>> mergeSort(int option);
-    vector<vector<string>> radixSort(int option);
-    vector<string> search(string name);
+    vector<unordered_map<string, int>> mergeSort(int option);
+    vector<unordered_map<string, int>> radixSort(int option);
+    unordered_map<string, int> search(string name);
 };
