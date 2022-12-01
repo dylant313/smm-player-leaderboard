@@ -4,6 +4,8 @@
         "xstring": "cpp",
         "unordered_map": "cpp",
         "string": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "utility": "cpp",
+        "fstream": "cpp"
     }
 }

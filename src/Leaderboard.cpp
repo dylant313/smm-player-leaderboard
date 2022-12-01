@@ -26,13 +26,13 @@ Leaderboard::Leaderboard()
     }
 }
 
-// return sorted vector
-vector<unordered_map<string, int>> Leaderboard::mergeSort(int option)
+// given choice of attribute, return sorted vector of name/attribute pairs
+vector<pair<string, int>> Leaderboard::mergeSort(string option)
 {
 }
 
-// return sorted vector
-vector<unordered_map<string, int>> Leaderboard::radixSort(int option)
+// given choice of attribute, return sorted vector of name/attribute pairs
+vector<pair<string, int>> Leaderboard::radixSort(string option)
 {
 }
 

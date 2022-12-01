@@ -14,7 +14,7 @@ private:
 
 public:
     Leaderboard();
-    vector<unordered_map<string, int>> mergeSort(int option);
-    vector<unordered_map<string, int>> radixSort(int option);
+    vector<pair<string, int>> mergeSort(string option);
+    vector<pair<string, int>> radixSort(string option);
     unordered_map<string, int> search(string name);
 };
