@@ -9,7 +9,7 @@ using namespace std;
 class Leaderboard
 {
 private:
-    // each player is represented by a string (name) and map of values (clears, likes, etc)
+    // each player is represented by a string (name) and map of values (plays, clears, likes, records)
     unordered_map<string, unordered_map<string, int>> unsortedPlayers;
 
 public:
