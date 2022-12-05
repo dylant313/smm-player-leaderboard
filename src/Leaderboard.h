@@ -14,6 +14,7 @@ private:
 
 public:
     Leaderboard();
+    void calculateRankings(double playMult, double clearMult, double likeMult, double recordMult);
     vector<pair<string, int>> mergeSort(string option);
     vector<pair<string, int>> radixSort(string option);
     unordered_map<string, int> search(string name);
