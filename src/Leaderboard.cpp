@@ -1,4 +1,8 @@
 #include "Leaderboard.h"
+/**********************************
+References:
+Merge sort code - Sorting slides
+**********************************/
 
 // import data into map
 Leaderboard::Leaderboard()
@@ -52,15 +56,6 @@ Leaderboard::Leaderboard()
     cout << "Importing data... (4/4)" << endl;
     cout << "Data imported successfully!" << endl
          << endl;
-}
-
-// calculate rankings using provided weights
-void Leaderboard::calculateRankings(double playMult, double clearMult, double likeMult, double recordMult)
-{
-    for (auto &player : unsortedPlayers)
-    {
-        player.second["ranking"] = (player.second["plays"] * playMult) + (player.second["clears"] * clearMult) + (player.second["likes"] * likeMult) + (player.second["records"] * recordMult);
-    }
 }
 
 // given choice of attribute, return sorted vector of name/attribute pairs

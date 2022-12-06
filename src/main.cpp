@@ -2,7 +2,6 @@
 
 int main()
 {
-    // implement console app
     Leaderboard board;
 
     // Prints out the main menu
@@ -18,10 +17,9 @@ int main()
              << endl;
         cin >> choice;
 
-        // Determines if program will just search players or sort them
+        // Determines if program will search players or sort them
         if (choice == 1)
         {
-
             while (true)
             {
                 cout << "Sort by which category?" << endl;
@@ -41,7 +39,7 @@ int main()
                 }
             }
 
-            // Sort based on choice
+            // Sort based on user's choice
             string choiceResult;
             switch (choice)
             {
@@ -59,44 +57,69 @@ int main()
                 break;
             }
 
-            // Vector holds sorted players by what the user chose
-            vector<pair<string, int>> players = board.mergeSort(choiceResult);
+            // Ensure both sorted vectors have the same output
+            vector<pair<string, int>> players1 = board.mergeSort(choiceResult);
+            vector<pair<string, int>> players2 = board.radixSort(choiceResult);
+            if (players1 != players2)
+            {
+                throw runtime_error("Sort outputs are not equal");
+            }
 
             // Display all users on current page
             int playerNumber;
             int pageNumber = 1;
-            choice = 0;
-            while (choice != 3)
+            while (true)
             {
                 cout << "Players with the most " << choiceResult << endl;
                 playerNumber = (pageNumber - 1) * 10;
                 for (int i = playerNumber; i < playerNumber + 10; i++)
                 {
-                    if (playerNumber < players.size())
-                        cout << i << ". " << players.at(i).first << " - " << players.at(i).second << " " << choiceResult << endl;
+                    if (playerNumber < players1.size())
+                        cout << i + 1 << ". " << players1.at(i).first << " - " << players1.at(i).second << " " << choiceResult << endl;
                 }
-                cout << "Page " << pageNumber << "/" << players.size() / 10 << endl
+                cout << "Page " << pageNumber << "/" << players1.size() / 10 << endl
                      << endl;
 
-                // Allow users to select another page
-                cout << "Select an option:\n1 - Next page\n2 - Jump to page number\n3 - Done\n"
+                // Options to select another page based on current page
+                cout << "Select an option:" << endl;
+                if (pageNumber != players1.size() / 10)
+                {
+                    cout << "1 - Next page" << endl;
+                }
+                if (pageNumber != 1)
+                {
+                    cout << "2 - Previous page" << endl;
+                }
+                cout << "3 - Jump to page number\n4 - Done\n"
                      << endl;
+
                 cin >> choice;
-                if (choice == 1)
+                if (choice == 1 && pageNumber != players1.size() / 10)
                     pageNumber++;
-                else if (choice == 2)
+                else if (choice == 2 && pageNumber != 1)
+                    pageNumber--;
+                else if (choice == 3)
                 {
                     // ensure selected page is valid
                     while (true)
                     {
                         cout << "Enter Page Number: " << endl;
                         cin >> pageNumber;
-                        if (pageNumber <= players.size() / 10 && pageNumber > 0)
+                        if (pageNumber <= players1.size() / 10 && pageNumber > 0)
                         {
                             break;
                         }
                         cout << "Invalid page number. Please try again." << endl;
                     }
+                }
+                else if (choice == 4)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "Unrecognized command. Try again\n"
+                         << endl;
                 }
             }
         }
@@ -109,6 +132,7 @@ int main()
                 cout << "Enter a player name:\n";
                 cin >> playerName;
 
+                // if player is present, display their stats
                 unordered_map<string, int> player = board.search(playerName);
                 if (!player.empty())
                 {
