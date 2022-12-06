@@ -62,15 +62,10 @@ int main()
             // Vector holds sorted players by what the user chose
             vector<pair<string, int>> players = board.mergeSort(choiceResult);
 
-            cout << "Merge Sort: completed in "
-                 << " ms" << endl;
-            cout << "Radix Sort: completed in "
-                 << " ms" << endl;
-            cout << endl;
-
             // Display all users on current page
             int playerNumber;
             int pageNumber = 1;
+            choice = 0;
             while (choice != 3)
             {
                 cout << "Players with the most " << choiceResult << endl;
@@ -78,7 +73,7 @@ int main()
                 for (int i = playerNumber; i < playerNumber + 10; i++)
                 {
                     if (playerNumber < players.size())
-                        cout << playerNumber << ". " << players.at(i).first << " - " << players.at(i).second << " " << choiceResult << endl;
+                        cout << i << ". " << players.at(i).first << " - " << players.at(i).second << " " << choiceResult << endl;
                 }
                 cout << "Page " << pageNumber << "/" << players.size() / 10 << endl
                      << endl;
@@ -96,7 +91,7 @@ int main()
                     {
                         cout << "Enter Page Number: " << endl;
                         cin >> pageNumber;
-                        if (pageNumber <= players.size() / 10)
+                        if (pageNumber <= players.size() / 10 && pageNumber > 0)
                         {
                             break;
                         }
