@@ -76,4 +76,10 @@ vector<pair<string, int>> Leaderboard::radixSort(string option)
 // search using unordered map, return map representing player
 unordered_map<string, int> Leaderboard::search(string name)
 {
+    if (unsortedPlayers.count(name) != 0)
+    {
+        return unsortedPlayers[name];
+    }
+    unordered_map<string, int> emptyMap;
+    return emptyMap;
 }
