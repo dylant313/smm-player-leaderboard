@@ -30,7 +30,7 @@ int main()
                 cin >> choice;
                 if (choice > 4 || choice < 1)
                 {
-                    cout << "Unrecognized command. Try again\n"
+                    cout << "Unrecognized command. Please try again.\n"
                          << endl;
                 }
                 else
@@ -75,12 +75,14 @@ int main()
                 for (int i = playerNumber; i < playerNumber + 10; i++)
                 {
                     if (playerNumber < players1.size())
+                    {
                         cout << i + 1 << ". " << players1.at(i).first << " - " << players1.at(i).second << " " << choiceResult << endl;
+                    }
                 }
                 cout << "Page " << pageNumber << "/" << players1.size() / 10 << endl
                      << endl;
 
-                // Options to select another page based on current page
+                // Display appropriate options based on current page
                 cout << "Select an option:" << endl;
                 if (pageNumber != players1.size() / 10)
                 {
@@ -93,11 +95,16 @@ int main()
                 cout << "3 - Jump to page number\n4 - Done\n"
                      << endl;
 
+                // Choose another page or exit
                 cin >> choice;
                 if (choice == 1 && pageNumber != players1.size() / 10)
+                {
                     pageNumber++;
+                }
                 else if (choice == 2 && pageNumber != 1)
+                {
                     pageNumber--;
+                }
                 else if (choice == 3)
                 {
                     // ensure selected page is valid
@@ -118,7 +125,7 @@ int main()
                 }
                 else
                 {
-                    cout << "Unrecognized command. Try again\n"
+                    cout << "Unrecognized command. Please try again.\n"
                          << endl;
                 }
             }
@@ -150,11 +157,12 @@ int main()
                 }
                 while (true)
                 {
+                    // Choose to search again or exit
                     cout << "Select an option:\n1 - Search another player\n2 - Exit" << endl;
                     cin >> choice;
                     if (choice > 2 || choice < 1)
                     {
-                        cout << "Unrecognized command. Try again\n"
+                        cout << "Unrecognized command. Please try again.\n"
                              << endl;
                     }
                     else
@@ -170,7 +178,7 @@ int main()
         }
         else
         {
-            cout << "Unrecognized command. Try again\n"
+            cout << "Unrecognized command. Please try again.\n"
                  << endl;
         }
     }

@@ -1,8 +1,8 @@
 #include "Leaderboard.h"
-/**********************************
+/*******************************************
 References:
-Merge sort code - Sorting slides
-**********************************/
+Merge sort code - Sorting lecture slides
+*******************************************/
 
 // import data into map
 Leaderboard::Leaderboard()
