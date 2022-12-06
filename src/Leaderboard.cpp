@@ -66,11 +66,96 @@ void Leaderboard::calculateRankings(double playMult, double clearMult, double li
 // given choice of attribute, return sorted vector of name/attribute pairs
 vector<pair<string, int>> Leaderboard::mergeSort(string option)
 {
+    vector<pair<string, int>> players;
+
+    for (auto& it : unsortedPlayers)
+    {
+        players.push_back(make_pair(it.first, it.second[option]));
+    }
+
+    int left = 0;
+    int right = players.size() - 1;
+
+    mergeSortHelper(players, left, right);
+
+    return players;
+}
+
+void Leaderboard::mergeSortHelper(vector<pair<string, int>> temp, int left, int right)
+{
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2;
+        mergeSortHelper(temp, left, mid);
+        mergeSortHelper(temp, mid + 1, right);
+
+        mergeHelper(temp, left, mid, right);
+    }
+}
+
+void Leaderboard::mergeHelper(vector<pair<string, int>> temp, int left, int mid, int right)
+{
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    vector<pair<string, int>> leftArray;
+    vector<pair<string, int>> rightArray;
+
+    for (int i = 0; i < n1; i++)
+    {
+        leftArray.push_back(temp.at(left + i));
+    }
+
+    for (int j = 0; j < n2; j++)
+    {
+        rightArray.push_back(temp.at(mid + 1 + j));
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = left;
+
+    while (i < n1 && j < n2)
+    {
+        if (leftArray.at(i).second <= rightArray.at(j).second)
+        {
+            temp.at(k) = leftArray.at(i);
+            i++;
+        }
+        else
+        {
+            temp.at(k) = rightArray.at(j);
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1)
+    {
+        temp.at(k) = leftArray.at(i);
+        i++;
+        k++;
+    }
+
+    while (j < n2)
+    {
+        temp.at(k) = rightArray.at(j);
+        j++;
+        k++;
+    }
 }
 
 // given choice of attribute, return sorted vector of name/attribute pairs
 vector<pair<string, int>> Leaderboard::radixSort(string option)
 {
+    vector < pair<string, int>> players;
+
+    for (auto& it : unsortedPlayers)
+    {
+        players.push_back(make_pair(it.first, it.second[option]));
+    }
+    
+    return players;
 }
 
 // search using unordered map, return map representing player
