@@ -18,4 +18,7 @@ public:
     vector<pair<string, int>> mergeSort(string option);
     vector<pair<string, int>> radixSort(string option);
     unordered_map<string, int> search(string name);
+    
+    void mergeSortHelper(vector<pair<string, int>> temp, int left, int right);
+    void mergeHelper(vector<pair<string, int>> temp, int left, int mid, int right);
 };
