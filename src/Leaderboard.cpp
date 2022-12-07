@@ -1,7 +1,8 @@
 #include "Leaderboard.h"
 /*******************************************
 References:
-Merge sort code - Sorting lecture slides
+Merge sort - Code from Sorting lecture slides
+Radix sort - Based on a conceptual discussion with Benny Cortese (TA)
 *******************************************/
 
 // import data into map
@@ -145,7 +146,6 @@ void Leaderboard::mergeHelper(vector<pair<string, int>> &temp, int left, int mid
 }
 
 // given choice of attribute, return sorted vector of name/attribute pairs
-// The idea for this function was based on a conceptual discussion with Benny Cortese (TA)
 vector<pair<string, int>> Leaderboard::radixSort(string option)
 {
     vector<pair<string, int>> players;
@@ -164,7 +164,8 @@ vector<pair<string, int>> Leaderboard::radixSort(string option)
 
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-    cout << "Radix Sort: completed in " << duration.count() << " ms" << endl;
+    cout << "Radix Sort: completed in " << duration.count() << " ms\n"
+         << endl;
 
     reverse(players.begin(), players.end());
     return players;
@@ -174,7 +175,7 @@ int Leaderboard::findMax(vector<pair<string, int>> &temp, int vectorSize)
 {
     int maxTemp = temp.at(0).second;
 
-    for (auto& i : temp)
+    for (auto &i : temp)
     {
         if (i.second > maxTemp)
         {
@@ -184,16 +185,15 @@ int Leaderboard::findMax(vector<pair<string, int>> &temp, int vectorSize)
     return maxTemp;
 }
 
-// The idea for this function was based on a conceptual discussion with Benny Cortese (TA)
 void Leaderboard::countSort(vector<pair<string, int>> &temp, int vectorSize, int placeValue)
 {
-    vector<pair<string, int>> output (vectorSize);
+    vector<pair<string, int>> output(vectorSize);
 
     // 10 bit counter because we will be working decimal system. Each place value will either have a digit between 0-9
-    int valueCount[10] = { 0 };
+    int valueCount[10] = {0};
 
     // Divide value by place value to iterate through all the place values that make up the number
-    for (auto& it : temp)
+    for (auto &it : temp)
     {
         int index = it.second / placeValue;
         valueCount[index % 10]++;

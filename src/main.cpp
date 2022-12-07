@@ -57,26 +57,39 @@ int main()
                 break;
             }
 
-            // Ensure both sorted vectors have the same output
+            // Compare both sorts
             vector<pair<string, int>> players1 = board.mergeSort(choiceResult);
             vector<pair<string, int>> players2 = board.radixSort(choiceResult);
-            if (players1 != players2)
-            {
-                throw runtime_error("Sort outputs are not equal");
-            }
 
             // Display all users on current page
             int playerNumber;
             int pageNumber = 1;
+            bool mergeSort = true;
             while (true)
             {
-                cout << "Players with the most " << choiceResult << endl;
+                // Display either merge or radix results
                 playerNumber = (pageNumber - 1) * 10;
-                for (int i = playerNumber; i < playerNumber + 10; i++)
+                cout << "Players with the most " << choiceResult;
+                if (mergeSort)
                 {
-                    if (playerNumber < players1.size())
+                    cout << " based on merge sort" << endl;
+                    for (int i = playerNumber; i < playerNumber + 10; i++)
                     {
-                        cout << i + 1 << ". " << players1.at(i).first << " - " << players1.at(i).second << " " << choiceResult << endl;
+                        if (playerNumber < players1.size())
+                        {
+                            cout << i + 1 << ". " << players1.at(i).first << " - " << players1.at(i).second << " " << choiceResult << endl;
+                        }
+                    }
+                }
+                else
+                {
+                    cout << " based on radix sort" << endl;
+                    for (int i = playerNumber; i < playerNumber + 10; i++)
+                    {
+                        if (playerNumber < players2.size())
+                        {
+                            cout << i + 1 << ". " << players2.at(i).first << " - " << players2.at(i).second << " " << choiceResult << endl;
+                        }
                     }
                 }
                 cout << "Page " << pageNumber << "/" << players1.size() / 10 << endl
@@ -92,10 +105,10 @@ int main()
                 {
                     cout << "2 - Previous page" << endl;
                 }
-                cout << "3 - Jump to page number\n4 - Done\n"
+                cout << "3 - Jump to page number\n4 - Switch sorting algorithms\n5 - Done\n"
                      << endl;
 
-                // Choose another page or exit
+                // Choose another page, switch sort results, or exit
                 cin >> choice;
                 if (choice == 1 && pageNumber != players1.size() / 10)
                 {
@@ -120,6 +133,10 @@ int main()
                     }
                 }
                 else if (choice == 4)
+                {
+                    mergeSort = !mergeSort;
+                }
+                else if (choice == 5)
                 {
                     break;
                 }
