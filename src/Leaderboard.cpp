@@ -55,8 +55,7 @@ Leaderboard::Leaderboard()
         getline(file4, line);
     }
     cout << "Importing data... (4/4)" << endl;
-    cout << "Data imported successfully!" << endl
-         << endl;
+    cout << "Data imported successfully!" << endl;
 }
 
 // given choice of attribute, return sorted vector of name/attribute pairs
@@ -81,7 +80,6 @@ vector<pair<string, int>> Leaderboard::mergeSort(string option)
     return players;
 }
 
-// The idea for this function was based on the Lecture Slides for Sorting
 void Leaderboard::mergeSortHelper(vector<pair<string, int>> &temp, int left, int right)
 {
     if (left < right)
@@ -95,7 +93,6 @@ void Leaderboard::mergeSortHelper(vector<pair<string, int>> &temp, int left, int
     }
 }
 
-// The idea for this function was based on the Lecture Slides for Sorting
 void Leaderboard::mergeHelper(vector<pair<string, int>> &temp, int left, int mid, int right)
 {
     // Create subarrays
@@ -169,8 +166,7 @@ vector<pair<string, int>> Leaderboard::radixSort(string option)
 
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-    cout << "Radix Sort: completed in " << duration.count() << " ms\n"
-         << endl;
+    cout << "Radix Sort: completed in " << duration.count() << " ms" << endl;
 
     reverse(players.begin(), players.end());
     return players;

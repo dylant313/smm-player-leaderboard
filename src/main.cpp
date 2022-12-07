@@ -8,13 +8,12 @@ int main()
     while (true)
     {
 
-        cout << "Welcome to the Super Mario Maker Player database!" << endl;
-        cout << "-------------------------------------------------\n\n";
+        cout << "\nWelcome to the Super Mario Maker Player database!" << endl;
+        cout << "-------------------------------------------------" << endl;
 
         // Takes in the choice of the user
         int choice;
-        cout << "Select an option:\n1 - Sort players\n2 - Search for a player\n3 - Exit" << endl
-             << endl;
+        cout << "\nSelect an option:\n1 - Sort players\n2 - Search for a player\n3 - Exit" << endl;
         cin >> choice;
 
         // Determines if program will search players or sort them
@@ -22,20 +21,19 @@ int main()
         {
             while (true)
             {
-                cout << "Sort by which category?" << endl;
+                cout << "\nSort by which category?" << endl;
                 cout << "1 - Number of plays\n2 - Number of clears" << endl;
-                cout << "3 - Number of likes given\n4 - Number of world records\n"
-                     << endl;
+                cout << "3 - Number of likes given\n4 - Number of world records" << endl;
 
                 cin >> choice;
                 if (choice > 4 || choice < 1)
                 {
-                    cout << "Unrecognized command. Please try again.\n"
-                         << endl;
+                    cout << "Unrecognized command. Please try again." << endl;
                 }
                 else
                 {
                     break;
+                    cout << endl;
                 }
             }
 
@@ -69,7 +67,7 @@ int main()
             {
                 // Display either merge or radix results
                 playerNumber = (pageNumber - 1) * 10;
-                cout << "Players with the most " << choiceResult;
+                cout << "\nPlayers with the most " << choiceResult;
                 if (mergeSort)
                 {
                     cout << " based on merge sort" << endl;
@@ -105,8 +103,7 @@ int main()
                 {
                     cout << "2 - Previous page" << endl;
                 }
-                cout << "3 - Jump to page number\n4 - Switch sorting algorithms\n5 - Done\n"
-                     << endl;
+                cout << "3 - Jump to page number\n4 - Switch sorting algorithms\n5 - Done" << endl;
 
                 // Choose another page, switch sort results, or exit
                 cin >> choice;
@@ -123,7 +120,7 @@ int main()
                     // ensure selected page is valid
                     while (true)
                     {
-                        cout << "Enter Page Number: " << endl;
+                        cout << "\nEnter Page Number: " << endl;
                         cin >> pageNumber;
                         if (pageNumber <= players1.size() / 10 && pageNumber > 0)
                         {
@@ -142,8 +139,7 @@ int main()
                 }
                 else
                 {
-                    cout << "Unrecognized command. Please try again.\n"
-                         << endl;
+                    cout << "Unrecognized command. Please try again." << endl;
                 }
             }
         }
@@ -153,7 +149,7 @@ int main()
             choice = 0;
             while (choice != 2)
             {
-                cout << "Enter a player name:\n";
+                cout << "\nEnter a player name:" << endl;
                 cin >> playerName;
 
                 // if player is present, display their stats
@@ -164,23 +160,20 @@ int main()
                     cout << "World records held - " << player["records"] << endl;
                     cout << "Courses played - " << player["plays"] << endl;
                     cout << "Courses cleared - " << player["clears"] << endl;
-                    cout << "Courses liked - " << player["likes"] << endl
-                         << endl;
+                    cout << "Courses liked - " << player["likes"] << endl;
                 }
                 else
                 {
-                    cout << "\nPlayer not found.\n"
-                         << endl;
+                    cout << "\nPlayer not found." << endl;
                 }
                 while (true)
                 {
                     // Choose to search again or exit
-                    cout << "Select an option:\n1 - Search another player\n2 - Exit" << endl;
+                    cout << "\nSelect an option:\n1 - Search another player\n2 - Exit" << endl;
                     cin >> choice;
                     if (choice > 2 || choice < 1)
                     {
-                        cout << "Unrecognized command. Please try again.\n"
-                             << endl;
+                        cout << "Unrecognized command. Please try again." << endl;
                     }
                     else
                     {
@@ -195,8 +188,7 @@ int main()
         }
         else
         {
-            cout << "Unrecognized command. Please try again.\n"
-                 << endl;
+            cout << "Unrecognized command. Please try again." << endl;
         }
     }
 
