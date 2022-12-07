@@ -1,4 +1,8 @@
 #include "Leaderboard.h"
+/*******************************************
+References:
+Merge sort code - Sorting lecture slides
+*******************************************/
 
 // import data into map
 Leaderboard::Leaderboard()
@@ -54,34 +58,29 @@ Leaderboard::Leaderboard()
          << endl;
 }
 
-// calculate rankings using provided weights
-void Leaderboard::calculateRankings(double playMult, double clearMult, double likeMult, double recordMult)
-{
-    for (auto &player : unsortedPlayers)
-    {
-        player.second["ranking"] = (player.second["plays"] * playMult) + (player.second["clears"] * clearMult) + (player.second["likes"] * likeMult) + (player.second["records"] * recordMult);
-    }
-}
-
 // given choice of attribute, return sorted vector of name/attribute pairs
 vector<pair<string, int>> Leaderboard::mergeSort(string option)
 {
     vector<pair<string, int>> players;
+    auto start = chrono::high_resolution_clock::now();
 
-    for (auto& it : unsortedPlayers)
+    for (auto &it : unsortedPlayers)
     {
         players.push_back(make_pair(it.first, it.second[option]));
     }
 
     int left = 0;
     int right = players.size() - 1;
-
     mergeSortHelper(players, left, right);
+
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+    cout << "Merge Sort: completed in " << duration.count() << " ms" << endl;
 
     return players;
 }
 
-void Leaderboard::mergeSortHelper(vector<pair<string, int>> temp, int left, int right)
+void Leaderboard::mergeSortHelper(vector<pair<string, int>> &temp, int left, int right)
 {
     if (left < right)
     {
@@ -93,7 +92,7 @@ void Leaderboard::mergeSortHelper(vector<pair<string, int>> temp, int left, int 
     }
 }
 
-void Leaderboard::mergeHelper(vector<pair<string, int>> temp, int left, int mid, int right)
+void Leaderboard::mergeHelper(vector<pair<string, int>> &temp, int left, int mid, int right)
 {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -117,7 +116,7 @@ void Leaderboard::mergeHelper(vector<pair<string, int>> temp, int left, int mid,
 
     while (i < n1 && j < n2)
     {
-        if (leftArray.at(i).second <= rightArray.at(j).second)
+        if (leftArray.at(i).second >= rightArray.at(j).second)
         {
             temp.at(k) = leftArray.at(i);
             i++;
@@ -149,10 +148,10 @@ void Leaderboard::mergeHelper(vector<pair<string, int>> temp, int left, int mid,
 // The idea for this function was based on a conceptual discussion with Benny Cortese (TA)
 vector<pair<string, int>> Leaderboard::radixSort(string option)
 {
-    vector < pair<string, int>> players;
+    vector<pair<string, int>> players;
     auto start = chrono::high_resolution_clock::now();
 
-    for (auto& it : unsortedPlayers)
+    for (auto &it : unsortedPlayers)
     {
         players.push_back(make_pair(it.first, it.second[option]));
     }
@@ -168,7 +167,6 @@ vector<pair<string, int>> Leaderboard::radixSort(string option)
     cout << "Radix Sort: completed in " << duration.count() << " ms" << endl;
 
     reverse(players.begin(), players.end());
-
     return players;
 }
 
