@@ -145,16 +145,77 @@ void Leaderboard::mergeHelper(vector<pair<string, int>> &temp, int left, int mid
 }
 
 // given choice of attribute, return sorted vector of name/attribute pairs
+// The idea for this function was based on a conceptual discussion with Benny Cortese (TA)
 vector<pair<string, int>> Leaderboard::radixSort(string option)
 {
     vector<pair<string, int>> players;
+    auto start = chrono::high_resolution_clock::now();
 
     for (auto &it : unsortedPlayers)
     {
         players.push_back(make_pair(it.first, it.second[option]));
     }
 
+    // Find maximum element to determine how many iterations over the place values of each element is needed
+    int max = findMax(players, players.size());
+
+    for (int placeValue = 1; max / placeValue > 0; placeValue *= 10)
+        countSort(players, players.size(), placeValue);
+
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+    cout << "Radix Sort: completed in " << duration.count() << " ms" << endl;
+
+    reverse(players.begin(), players.end());
     return players;
+}
+
+int Leaderboard::findMax(vector<pair<string, int>> &temp, int vectorSize)
+{
+    int maxTemp = temp.at(0).second;
+
+    for (auto& i : temp)
+    {
+        if (i.second > maxTemp)
+        {
+            maxTemp = i.second;
+        }
+    }
+    return maxTemp;
+}
+
+// The idea for this function was based on a conceptual discussion with Benny Cortese (TA)
+void Leaderboard::countSort(vector<pair<string, int>> &temp, int vectorSize, int placeValue)
+{
+    vector<pair<string, int>> output (vectorSize);
+
+    // 10 bit counter because we will be working decimal system. Each place value will either have a digit between 0-9
+    int valueCount[10] = { 0 };
+
+    // Divide value by place value to iterate through all the place values that make up the number
+    for (auto& it : temp)
+    {
+        int index = it.second / placeValue;
+        valueCount[index % 10]++;
+    }
+
+    // Predetermine index position in output
+    for (int i = 1; i < 10; i++)
+    {
+        valueCount[i] += valueCount[i - 1];
+    }
+
+    for (int i = vectorSize - 1; i >= 0; i--)
+    {
+        int index = temp.at(i).second / placeValue;
+        output.at(valueCount[index % 10] - 1) = temp.at(i);
+        valueCount[(temp.at(i).second / placeValue) % 10]--;
+    }
+
+    for (int i = 0; i < vectorSize; i++)
+    {
+        temp.at(i) = output.at(i);
+    }
 }
 
 // search using unordered map, return map representing player
