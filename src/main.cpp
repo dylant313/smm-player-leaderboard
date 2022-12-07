@@ -8,8 +8,8 @@ int main()
     while (true)
     {
 
-        cout << "\nWelcome to the Super Mario Maker Player database!" << endl;
-        cout << "-------------------------------------------------" << endl;
+        cout << "\nWelcome to the Super Mario Maker Player leaderboards!" << endl;
+        cout << "-----------------------------------------------------" << endl;
 
         // Takes in the choice of the user
         int choice;
@@ -73,7 +73,7 @@ int main()
                     cout << " based on merge sort" << endl;
                     for (int i = playerNumber; i < playerNumber + 10; i++)
                     {
-                        if (playerNumber < players1.size())
+                        if (i < players1.size())
                         {
                             cout << i + 1 << ". " << players1.at(i).first << " - " << players1.at(i).second << " " << choiceResult << endl;
                         }
@@ -84,18 +84,18 @@ int main()
                     cout << " based on radix sort" << endl;
                     for (int i = playerNumber; i < playerNumber + 10; i++)
                     {
-                        if (playerNumber < players2.size())
+                        if (i < players2.size())
                         {
                             cout << i + 1 << ". " << players2.at(i).first << " - " << players2.at(i).second << " " << choiceResult << endl;
                         }
                     }
                 }
-                cout << "Page " << pageNumber << "/" << players1.size() / 10 << endl
+                cout << "Page " << pageNumber << "/" << (players1.size() / 10) + 1 << endl
                      << endl;
 
                 // Display appropriate options based on current page
                 cout << "Select an option:" << endl;
-                if (pageNumber != players1.size() / 10)
+                if (pageNumber != (players1.size() / 10) + 1)
                 {
                     cout << "1 - Next page" << endl;
                 }
@@ -107,7 +107,7 @@ int main()
 
                 // Choose another page, switch sort results, or exit
                 cin >> choice;
-                if (choice == 1 && pageNumber != players1.size() / 10)
+                if (choice == 1 && pageNumber != (players1.size() / 10) + 1)
                 {
                     pageNumber++;
                 }
@@ -122,7 +122,7 @@ int main()
                     {
                         cout << "\nEnter Page Number: " << endl;
                         cin >> pageNumber;
-                        if (pageNumber <= players1.size() / 10 && pageNumber > 0)
+                        if (pageNumber <= (players1.size() / 10) + 1 && pageNumber > 0)
                         {
                             break;
                         }
