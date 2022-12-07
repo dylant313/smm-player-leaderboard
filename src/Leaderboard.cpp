@@ -80,10 +80,12 @@ vector<pair<string, int>> Leaderboard::mergeSort(string option)
     return players;
 }
 
+// The idea for this function was based on the Lecture Slides for Sorting
 void Leaderboard::mergeSortHelper(vector<pair<string, int>> &temp, int left, int right)
 {
     if (left < right)
     {
+        // Determine where the list of elements will begin to be divided into subarrays
         int mid = left + (right - left) / 2;
         mergeSortHelper(temp, left, mid);
         mergeSortHelper(temp, mid + 1, right);
@@ -92,8 +94,10 @@ void Leaderboard::mergeSortHelper(vector<pair<string, int>> &temp, int left, int
     }
 }
 
+// The idea for this function was based on the Lecture Slides for Sorting
 void Leaderboard::mergeHelper(vector<pair<string, int>> &temp, int left, int mid, int right)
 {
+    // Create subarrays
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
@@ -110,6 +114,7 @@ void Leaderboard::mergeHelper(vector<pair<string, int>> &temp, int left, int mid
         rightArray.push_back(temp.at(mid + 1 + j));
     }
 
+    // Merge arrays
     int i = 0;
     int j = 0;
     int k = left;
